@@ -1,23 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import { Layout, Typography, Spacer } from "antd";
+import {
+  HomePage,
+  Navbar,
+  News,
+  Exchanges,
+  CryptoDetails,
+  CryptoCurrencies,
+} from "./components/";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="app">
+      <div className="navbar">
+        <Navbar />
+      </div>
+      <div className="main ">
+        <Layout>
+          <div className="routes">
+            <Routes>
+              <Route index element={<HomePage />} />
+              <Route path="News" element={<News />} />
+              <Route path="Exchanges" element={<Exchanges />} />
+              <Route path="CryptoDetails" element={<CryptoDetails />} />
+              <Route path="CryptoCurrencies" element={<CryptoCurrencies />} />
+              <Route
+                path="CryptoCurrencies/:coniId"
+                element={<CryptoCurrencies />}
+              />
+              <Route path="news" element={<News />} />
+            </Routes>
+        
+      </div>
+        </Layout>
+      <div className="footer">
+        <Typography.Title
+          level={5}
+          style={{ color: "white", textAlign: "center" }}
         >
-          Learn React
-        </a>
-      </header>
+          cryptovarce <br />
+          all right reserved
+        </Typography.Title>
+        <span>
+          <Link to="/"> home</Link>
+          <Link to="CryptoCurrencies"> CryptoCurrencies</Link>
+          <Link to="Exchanges"> Exchanges</Link>
+          <Link to="News"> News</Link>
+        </span>
+      </div>  </div>
     </div>
   );
 }
