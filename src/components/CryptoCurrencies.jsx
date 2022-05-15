@@ -19,7 +19,7 @@ const CryptoCurrencies = ({ simplified }) => {
   }, [cryptosList]);
 
   useEffect(() => {
-    search == NaN
+    search === NaN
       ? setcrypto(
           cryptosList?.data?.coins.filter((filter) =>
             filter.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
