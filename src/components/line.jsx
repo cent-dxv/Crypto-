@@ -1,48 +1,69 @@
-import React from "react";
-import { Line } from 'react-chartjs-2';
+import React, { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
 import { Col, Row, Typography } from "antd";
+
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 const { Title } = Typography;
 
-const LineChart = ({  CoinHistory, currentPrice, CoinName }) => {
-    const coinPrice = [];
-    const coinTimestamp = [];
-  
-    for (let i = 0; i < CoinHistory?.data?.history?.length; i += 1) {
-      coinPrice.push(CoinHistory?.data?.history[i].price);
-    }
-  
-    for (let i = 0; i < CoinHistory?.data?.history?.length; i += 1) {
-      coinTimestamp.push(new Date(CoinHistory?.data?.history[i].timestamp).toLocaleDateString());
-    }
+const LineChart = ({ CoinHistory, currentPrice, CoinName }) => {
+  const [coinPrice ,setcoinPrice ]= useState([]);
+  const [coinTimestamp ,settimestamp ]= useState([]);
 
-    console.log ( 'PRICE' + coinPrice)
-    const data = {
-      labels: coinTimestamp,
-      datasets: [
+ 
+  // const [data, setData] = useState([]);
+
+
+  useEffect(() => {
+    CoinHistory?.data?.history.map(({ price, timestamp }) => {
+        setcoinPrice(prevarr => [...prevarr,price]);
+        settimestamp(prevarr => [...prevarr,timestamp]);
+        
+        // coinTimestamp.push(timestamp);
+    });
+  }, [CoinHistory]);
+
+  // console.log(data)
+
+  // for (let i = 0; i < CoinHistory?.data?.history?.length; i += 1) {
+  //   coinPrice.push(CoinHistory?.data?.history[i].price);
+  // }
+
+  // for (let i = 0; i < CoinHistory?.data?.history?.length; i += 1) {
+  //   coinTimestamp.push(new Date(CoinHistory?.data?.history[i].timestamp).toLocaleDateString());
+  // }
+
+  console.log ( 'PRICE' + coinTimestamp)
+
+  const data = {
+    labels: coinTimestamp,
+    datasets: [
+      {
+        
+        label: 'Price In USD',
+        data: coinPrice,
+        fill: false,
+        backgroundColor: '#0071bd',
+        borderColor: '#0071bd',
+      },
+    ],
+  };
+
+  const options = {
+    scales: {
+      yAxes: [
         {
-          label: 'Price In USD',
-          data: coinPrice,
-          fill: false,
-          backgroundColor: '#0071bd',
-          borderColor: '#0071bd',
+          ticks: {
+            // suggestedMin: 0,   
+           
+            min: true
+          },
         },
       ],
-    };
-  
-    const options = {
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-            },
-          },
-        ],
-      },
-    };
-  
-  
+    },
+  };
+
   return (
     <>
       <Row className="chart-header">
@@ -61,7 +82,7 @@ const LineChart = ({  CoinHistory, currentPrice, CoinName }) => {
           </Title>
         </Col>
       </Row>
-      {/* <Line data={data} options={options} /> */}
+      <Line  data = {data}   />
     </>
   );
 };
