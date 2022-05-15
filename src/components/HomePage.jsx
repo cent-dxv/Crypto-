@@ -12,14 +12,14 @@ import News from "./News";
 const { Title } = Typography;
 
 const Homepage = () => {
-  const { data, error, isLoading } = useGetCryptosQuery();
+  const { data, error, isLoading } = useGetCryptosQuery(1);
   // const { data, error, isLoading } = useGetPokemonByNameQuery('bulbasaur')
 
  const globalstatus = data ? data?.data?.stats : ''
 
-//  console.log(" data " + data && data);
-//  console.log(" is fetching .." + isLoading);
-//  console.log(" is error .." + error);
+ console.log(" data " + data && data);
+ console.log(" is fetching .." + isLoading);
+ console.log(" is error .." + error && error);
 
   return (
     <>
@@ -72,13 +72,13 @@ const Homepage = () => {
           <Link to="CryptoCurrencies">show more </Link>
         </Title>{" "}
       </div>
-      <CryptoCurrencies simplified/>
+      <CryptoCurrencies simplified = {true}/>
       <Title level={2}> Letest Crypto News</Title>
       <Title level={3} className="show-more">
         {" "}
         <Link to="News">more news </Link>
       </Title>{" "}
-      <News simplified/>
+      <News simplified = {true}/>
     </>
   );
 };

@@ -171,7 +171,7 @@ a:hover{
 }
 
 .stats-container{
-  display: flex;
+  display: flex !important;
   justify-content: space-between;
   align-items: center;
   gap: 40px;
@@ -310,11 +310,13 @@ padding: 0px 20px;
 }
 .news-title{
 width: 70%;
+/* text-overflow: ellipsis; */
 }
 
-.news-image-container .img{
+.news-image-container img{
   width:100px;
   height:100px;
+
 }
 .news-card p{
   color: black;
