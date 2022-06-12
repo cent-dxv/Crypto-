@@ -41,7 +41,7 @@ function App() {
         >
           cryptovarce <br />
           all right reserved <br />
-            create and developed by cent
+            
         </Typography.Title>
         <span>
           <Link to="/"> home</Link>
