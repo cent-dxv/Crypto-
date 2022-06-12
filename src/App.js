@@ -40,7 +40,8 @@ function App() {
           style={{ color: "white", textAlign: "center" }}
         >
           cryptovarce <br />
-          all right reserved
+          all right reserved <br />
+            create and developed by cent
         </Typography.Title>
         <span>
           <Link to="/"> home</Link>
